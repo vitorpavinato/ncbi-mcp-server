@@ -1,0 +1,20 @@
+name: ncbi-mcp
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - httpx>=0.25.0
+  - typing_extensions>=4.0.0
+  # Development dependencies (optional)
+  - pytest>=7.0.0
+  - black>=23.0.0
+  - mypy>=1.0.0
+  - isort>=5.12.0
+  - flake8>=6.0.0
+  # Install via pip (not available on conda)
+  - pip
+  - pip:
+    - mcp>=1.0.0
+    - pytest-asyncio>=0.21.0
+    - pytest-cov>=4.0.0

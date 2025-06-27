@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  ncbi-mcp-server:
+    build: .
+    container_name: ncbi-mcp-server
+    restart: unless-stopped
+    environment:
+      - NCBI_EMAIL=${NCBI_EMAIL}
+      - NCBI_API_KEY=${NCBI_API_KEY}
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - ./cache:/app/.cache
+      - ./logs:/app/logs
+    depends_on:
+      - redis
+    networks:
+      - ncbi-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: ncbi-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - ncbi-network
+    ports:
+      - "6379:6379"
+
+  # Optional: Redis monitoring
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander
+    hostname: redis-commander
+    restart: unless-stopped
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - ncbi-network
+
+volumes:
+  redis_data:
+
+networks:
+  ncbi-network:
+    driver: bridge
