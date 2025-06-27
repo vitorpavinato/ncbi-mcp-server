@@ -25,7 +25,6 @@ from mcp.server.fastmcp import FastMCP
 
 # Import our modules
 from .analytics import AnalyticsManager, track_usage
-from .cache import SimpleLRUCache
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -457,6 +456,7 @@ async def batch_get_article_details(pmids: List[str], chunk_size: int = 50) -> D
 @mcp.tool()
 async def get_analytics_summary() -> Dict[str, Any]:
     """Get comprehensive analytics summary including usage stats, performance metrics, and system health."""
+    global analytics_manager
     try:
         summary = await analytics_manager.get_analytics_summary()
         return summary
@@ -466,6 +466,7 @@ async def get_analytics_summary() -> Dict[str, Any]:
 @mcp.tool()
 async def get_detailed_metrics(hours: int = 24) -> Dict[str, Any]:
     """Get detailed performance metrics for the specified time period (default: last 24 hours)."""
+    global analytics_manager
     try:
         metrics = await analytics_manager.get_detailed_metrics(hours)
         return metrics
@@ -476,11 +477,11 @@ async def get_detailed_metrics(hours: int = 24) -> Dict[str, Any]:
 async def reset_analytics() -> Dict[str, Any]:
     """Reset analytics data (use with caution - this will clear all collected metrics)."""
     try:
+        global analytics_manager
         # Stop current analytics
         await analytics_manager.stop()
         
         # Create new analytics manager
-        global analytics_manager
         analytics_manager = AnalyticsManager(
             analytics_file=os.path.join(os.getcwd(), "analytics.json"),
             max_events_memory=1000,
