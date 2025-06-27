@@ -23,6 +23,10 @@ load_dotenv()
 import httpx
 from mcp.server.fastmcp import FastMCP
 
+# Import our modules
+from .analytics import AnalyticsManager, track_usage
+from .cache import SimpleLRUCache
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("ncbi-mcp-server")
@@ -310,10 +314,18 @@ ncbi_client = CachedNCBIClient(
 # Initialize batch processor
 batch_processor = BatchProcessor(ncbi_client, max_concurrent=5)
 
+# Initialize analytics manager
+analytics_manager = AnalyticsManager(
+    analytics_file=os.path.join(os.getcwd(), "analytics.json"),
+    max_events_memory=1000,
+    flush_interval=300  # 5 minutes
+)
+
 # Create FastMCP server
 mcp = FastMCP("NCBI Literature Search")
 
 @mcp.tool()
+@track_usage("search_pubmed", "search")
 async def search_pubmed(
     query: str,
     max_results: int = 20,
@@ -328,6 +340,7 @@ async def search_pubmed(
         return {"error": str(e)}
 
 @mcp.tool()
+@track_usage("get_article_details", "fetch")
 async def get_article_details(pmids: List[str]) -> Dict[str, Any]:
     """Fetch detailed information for specific PubMed articles."""
     try:
@@ -337,6 +350,7 @@ async def get_article_details(pmids: List[str]) -> Dict[str, Any]:
         return {"error": str(e)}
 
 @mcp.tool()
+@track_usage("search_mesh_terms", "search")
 async def search_mesh_terms(term: str) -> Dict[str, Any]:
     """Search Medical Subject Headings (MeSH) terms."""
     try:
@@ -346,6 +360,7 @@ async def search_mesh_terms(term: str) -> Dict[str, Any]:
         return {"error": str(e)}
 
 @mcp.tool()
+@track_usage("get_related_articles", "search")
 async def get_related_articles(pmid: str, max_results: int = 10) -> Dict[str, Any]:
     """Find articles related to a specific PubMed article."""
     try:
@@ -355,6 +370,7 @@ async def get_related_articles(pmid: str, max_results: int = 10) -> Dict[str, An
         return {"error": str(e)}
 
 @mcp.tool()
+@track_usage("advanced_search", "search")
 async def advanced_search(
     terms: List[str],
     operator: str = "AND",
@@ -437,8 +453,75 @@ async def batch_get_article_details(pmids: List[str], chunk_size: int = 50) -> D
     except Exception as e:
         return {"error": str(e)}
 
+# Analytics MCP Tools
+@mcp.tool()
+async def get_analytics_summary() -> Dict[str, Any]:
+    """Get comprehensive analytics summary including usage stats, performance metrics, and system health."""
+    try:
+        summary = await analytics_manager.get_analytics_summary()
+        return summary
+    except Exception as e:
+        return {"error": str(e)}
+
+@mcp.tool()
+async def get_detailed_metrics(hours: int = 24) -> Dict[str, Any]:
+    """Get detailed performance metrics for the specified time period (default: last 24 hours)."""
+    try:
+        metrics = await analytics_manager.get_detailed_metrics(hours)
+        return metrics
+    except Exception as e:
+        return {"error": str(e)}
+
+@mcp.tool()
+async def reset_analytics() -> Dict[str, Any]:
+    """Reset analytics data (use with caution - this will clear all collected metrics)."""
+    try:
+        # Stop current analytics
+        await analytics_manager.stop()
+        
+        # Create new analytics manager
+        global analytics_manager
+        analytics_manager = AnalyticsManager(
+            analytics_file=os.path.join(os.getcwd(), "analytics.json"),
+            max_events_memory=1000,
+            flush_interval=300
+        )
+        
+        # Start new analytics
+        await analytics_manager.start()
+        
+        return {
+            "status": "success",
+            "message": "Analytics data has been reset",
+            "reset_time": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+async def startup():
+    """Initialize services on startup"""
+    await analytics_manager.start()
+    logger.info("All services initialized")
+
+async def shutdown():
+    """Cleanup on shutdown"""
+    await analytics_manager.stop()
+    await ncbi_client.close()
+    logger.info("All services shut down")
+
 def main():
     """Main function to run the MCP server"""
+    # Set up event loop for startup/shutdown
+    async def run_with_lifecycle():
+        try:
+            await startup()
+            # Run the MCP server (this will block)
+            await mcp.run_async()
+        finally:
+            await shutdown()
+    
+    # For now, just run the basic server
+    # TODO: Implement proper lifecycle management
     mcp.run()
 
 if __name__ == "__main__":

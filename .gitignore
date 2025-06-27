@@ -50,6 +50,10 @@ run_server.sh
 *.log
 logs/
 
+# Analytics data
+analytics.json
+test_analytics.py
+
 # Testing
 .coverage
 .pytest_cache/
