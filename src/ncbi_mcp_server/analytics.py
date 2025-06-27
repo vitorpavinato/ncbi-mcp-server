@@ -363,18 +363,20 @@ def track_usage(operation: str, event_type: str = "search"):
                 
                 # Record the event (will be available through global analytics_manager)
                 try:
-                    from . import analytics_manager
-                    if analytics_manager:
-                        analytics_manager.record_event(
-                            event_type=event_type,
-                            operation=operation,
-                            duration_ms=duration_ms,
-                            query_hash=query_hash,
-                            result_count=result_count,
-                            cache_hit=cache_hit,
-                            error=error
-                        )
-                except ImportError:
+                    import sys
+                    if 'ncbi_mcp_server.server' in sys.modules:
+                        server_module = sys.modules['ncbi_mcp_server.server']
+                        if hasattr(server_module, 'analytics_manager') and server_module.analytics_manager:
+                            server_module.analytics_manager.record_event(
+                                event_type=event_type,
+                                operation=operation,
+                                duration_ms=duration_ms,
+                                query_hash=query_hash,
+                                result_count=result_count,
+                                cache_hit=cache_hit,
+                                error=error
+                            )
+                except Exception:
                     pass  # Analytics manager not available
         
         return wrapper

@@ -179,6 +179,61 @@ Complex searches with multiple criteria
 - **date_from/date_to**: Date range in YYYY/MM/DD format
 - **max_results**: Number of results (1-100, default: 20)
 
+## Analytics & Performance Monitoring
+
+The NCBI MCP Server includes comprehensive analytics to help you understand your research patterns and optimize performance.
+
+### Analytics Tools
+
+#### `get_analytics_summary`
+Get comprehensive analytics overview
+```
+"Show me my research analytics summary"
+```
+Returns:
+- Total requests and uptime
+- Operation breakdown (searches, fetches, etc.)
+- Cache performance metrics
+- Recent activity and error rates
+- System health indicators
+
+#### `get_detailed_metrics`
+Detailed performance metrics for specific time periods
+```
+"Get detailed metrics for the last 24 hours"
+```
+- **hours**: Time period to analyze (default: 24)
+- Operation-specific performance data
+- Timeline analysis with hourly breakdowns
+- Error rates and response times per operation
+
+#### `reset_analytics`
+Reset analytics data (use with caution)
+```
+"Reset all analytics data"
+```
+**Note**: This permanently clears all collected metrics.
+
+### What's Tracked
+
+**Usage Patterns:**
+- Search queries and frequency
+- Most used operations
+- Unique vs. repeated queries
+- Peak usage periods
+
+**Performance Metrics:**
+- Response times for each operation
+- Cache hit/miss rates
+- Error rates and types
+- Rate limiting efficiency
+
+**Research Insights:**
+- Popular search terms and patterns
+- Research workflow analysis
+- Literature access patterns
+- Most accessed journals and topics
+
 ## Deployment
 
 ### Quick Start
