@@ -1,14 +1,14 @@
 [tool.poetry]
 name = "ncbi-mcp-server"
 version = "1.0.0"
-description = "NCBI Literature Search MCP Server for scientific research"
+description = "Model Context Protocol server for NCBI/PubMed literature search across all life sciences and biomedical research"
 authors = ["Vitor Pavinato <vitor.pavinato@proton.me>"]
 readme = "README.md"
 license = "MIT"
-homepage = "https://github.com/yourusername/ncbi-mcp-server"
-repository = "https://github.com/yourusername/ncbi-mcp-server"
-documentation = "https://github.com/yourusername/ncbi-mcp-server"
-keywords = ["mcp", "ncbi", "pubmed", "literature", "research", "biology", "bioinformatics"]
+homepage = "https://github.com/vitorpavinato/ncbi-mcp-server"
+repository = "https://github.com/vitorpavinato/ncbi-mcp-server"
+documentation = "https://github.com/vitorpavinato/ncbi-mcp-server"
+keywords = ["mcp", "model-context-protocol", "ncbi", "pubmed", "literature-search", "biomedical", "life-sciences", "research", "bioinformatics", "scientific-literature"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",

@@ -29,6 +29,12 @@ RUN poetry install --only-root
 # Create cache directory
 RUN mkdir -p .cache
 
+# Set default environment variables for easier usage
+ENV NCBI_EMAIL="" \
+    NCBI_API_KEY="" \
+    LOG_LEVEL="INFO" \
+    PYTHONUNBUFFERED=1
+
 # Create non-root user for security
 RUN useradd --create-home --shell /bin/bash app \
     && chown -R app:app /app

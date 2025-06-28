@@ -1,13 +1,14 @@
 # NCBI Literature Search MCP Server
 
-A Model Context Protocol (MCP) server for searching NCBI databases, specifically designed for researchers in evolutionary biology, computational biology, and all life sciences. This server provides seamless access to PubMed's vast collection of scientific literature through natural language queries.
+A Model Context Protocol (MCP) server for searching NCBI databases, designed for researchers across all life sciences and biomedical fields. This server provides seamless access to PubMed's vast collection of 35+ million scientific articles through natural language queries, enabling AI assistants to help with literature reviews, research discovery, and scientific analysis.
 
 ## Features
 
 🔬 **Comprehensive Search**: Search PubMed's 35+ million articles across all biological disciplines
 📊 **Advanced Queries**: Support for complex searches with boolean operators, field tags, and filters  
-🧬 **Evolutionary Biology Focus**: Optimized for phylogenetics, population genetics, and comparative genomics research
+🧬 **Life Sciences Research**: Covers all biological and biomedical fields including genetics, ecology, medicine, and biotechnology
 💻 **Computational Biology**: Perfect for finding bioinformatics methods, algorithms, and computational tools
+🔬 **Research Applications**: Literature reviews, hypothesis generation, method discovery, and staying current with scientific advances
 📚 **Full Article Details**: Get abstracts, author lists, MeSH terms, DOIs, and publication information
 🔗 **Related Articles**: Discover relevant research through NCBI's relationship algorithms
 📖 **MeSH Integration**: Search and utilize Medical Subject Headings for precise terminology
@@ -266,15 +267,35 @@ poetry run python -m src.ncbi_mcp_server.server
 ```
 
 #### 2. Docker Deployment
-Recommended for most users:
+Recommended for most users with two options:
+
+**Full setup with Redis (recommended):**
 ```bash
+# Copy and configure environment
+cp .env.example .env
+# Edit .env with your NCBI email and API key
+
+# Start all services
 docker-compose up -d
 ```
 
-Includes:
+**Simple setup without Redis:**
+```bash
+# For basic usage without Redis dependencies
+cp .env.example .env
+# Edit .env with your NCBI email
+
+docker-compose -f docker-compose.simple.yml up -d
+```
+
+**Full setup includes:**
 - NCBI MCP Server container
 - Redis cache for performance
 - Redis Commander UI (http://localhost:8081)
+
+**Simple setup includes:**
+- NCBI MCP Server container only
+- In-memory caching (no persistence)
 
 #### 3. Production Deployment
 For production environments:

@@ -1,0 +1,77 @@
+Recent Papers on Fitness Effects Inference (2023-2025)
+Based on my search across the four strategies you specified, here are the most recent papers from 2023-2025:
+Strategy 1: "Selective forces site frequency spectrum"
+No papers from 2023-2025 in top results.
+Strategy 2: "Mutation fitness effects inference"
+2023-2025 Papers:
+
+Soni et al. (2024) - "The Effects of Mutation and Recombination Rate Heterogeneity on the Inference of Demography and the Distribution of Fitness Effects"
+
+Genome Biology and Evolution, 2024-Feb
+PMID: 38207127
+Examines how unaccounted rate heterogeneity impacts DFE and demographic inference using tools like DFE-alpha, Grapes, and polyDFE
+
+
+Crombie et al. (2024) - "Direct inference of the distribution of fitness effects of spontaneous mutations from recombinant inbred Caenorhabditis elegans mutation accumulation lines"
+
+Genetics, 2024-Oct
+PMID: 39139098
+Uses recombinant inbred lines to reduce linkage disequilibrium and infer DFE, finding conventional wisdom about mostly neutral/negative effects is likely correct
+
+
+Weinstock et al. (2023) - "Aberrant activation of TCL1A promotes stem cell expansion in clonal haematopoiesis"
+
+Nature, 2023-Apr
+PMID: 37046083
+Studies mutations that increase HSC fitness leading to clonal hematopoiesis
+
+
+Soni et al. (2023) - "The effects of mutation and recombination rate heterogeneity on the inference of demography and the distribution of fitness effects" [Preprint]
+
+bioRxiv, 2023-Nov
+PMID: 38014252
+Earlier preprint version of the above study
+
+
+
+Strategy 3: "Site frequency ratio fitness"
+2023-2025 Papers:
+
+Hey & Pavinato (2025) - "Isolating selective from non-selective forces using site frequency ratios"
+
+PLoS Genetics, 2025-Apr (in press)
+PMID: 40258089
+Novel method using site frequency ratios to estimate DFE while avoiding non-selective demographic effects
+
+
+Onerup et al. (2023) - "Associations between cardiorespiratory fitness in youth and the incidence of site-specific cancer in men: a cohort study with register linkage"
+
+British Journal of Sports Medicine, 2023-Oct
+PMID: 37582636
+Epidemiological study on fitness and cancer risk
+
+
+Onerup et al. (2023) - "Cardiorespiratory fitness and BMI measured in youth and 5-year mortality after site-specific cancer diagnoses in men"
+
+Cancer Medicine, 2023-Oct
+PMID: 37732468
+Follow-up study on fitness measures and cancer outcomes
+
+
+Zatloukal et al. (2024) - "The Association Between C24:0/C16:0 Ceramide Ratio and Cardiorespiratory Fitness is Robust to Effect Modifications by Age and Sex"
+
+Advanced Biology, 2024-Apr
+PMID: 38342586
+Biochemical study of ceramides and fitness associations
+
+
+
+Strategy 4: "DFE population genomics"
+No papers from 2023-2025 in top results.
+Key Recent Methodological Advances (2023-2025):
+
+Site Frequency Ratios Method (Hey & Pavinato 2025): Novel approach using ratios of selected to neutral sites to avoid demographic confounding effects when estimating DFE.
+Accounting for Rate Heterogeneity (Soni et al. 2024): Demonstrates how unmodeled mutation and recombination rate variation can bias DFE inference, emphasizing need for better parameter modeling.
+Linkage Disequilibrium Effects (Crombie et al. 2024): Uses recombinant inbred lines to show how LD between mutations can lead to overestimation of positive fitness effects in DFE inference.
+
+These recent papers highlight ongoing challenges in DFE inference, particularly around demographic confounding, rate heterogeneity, and linkage effects, while proposing new methodological solutions.

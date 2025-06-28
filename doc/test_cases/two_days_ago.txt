@@ -1,0 +1,59 @@
+Based on my search across multiple strategies, here are the most recent papers (2023-2025) focused on fitness effects inference using population genomic approaches:
+Recent Papers (2023-2025) - Key Findings
+Most Recent Methodological Advances:
+1. Hey & Pavinato (2025) - "Isolating selective from non-selective forces using site frequency ratios"
+
+Journal: PLoS Genetics
+Innovation: Novel method using ratios of selected to neutral site frequencies to avoid confounding demographic effects
+Key Advance: Works with Poisson ratios treated as Gaussian variables, avoids estimating relative mutation rates
+Application: Successfully applied to Drosophila melanogaster populations
+
+2. Crombie et al. (2024) - "Direct inference of the distribution of fitness effects from C. elegans mutation accumulation lines"
+
+Journal: Genetics
+Innovation: Uses recombinant inbred lines to reduce linkage disequilibrium confounding in DFE inference
+Key Finding: Challenges conventional wisdom - suggests ~40% of mutations may have positive effects when linkage is not properly accounted for
+Methodological insight: Demonstrates importance of controlling for linkage disequilibrium in DFE estimation
+
+3. Soni, Pfeifer & Jensen (2024) - "Effects of mutation and recombination rate heterogeneity on DFE inference"
+
+Journal: Genome Biology and Evolution
+Focus: Impact of unmodeled rate heterogeneity on demographic and selective parameter inference
+Tools Analyzed: DFE-alpha, Grapes, polyDFE, fastsimcoal2, δaδi
+Key Warning: Rate heterogeneity can cause misleading inference if not properly modeled
+
+Important 2022 Methodological Papers (Highly Relevant Context):
+4. Ortega-Del Vecchyo et al. (2022) - "Haplotype-based inference of distribution of fitness effects"
+
+Innovation: Uses haplotype identity-by-state lengths around low-frequency variants
+Advantage: Can distinguish positive vs. negative selection in non-equilibrium populations
+Application: UK10K dataset analysis
+
+5. Dilber & Terhorst (2022) - "Robust detection of natural selection using probabilistic model of tree imbalance"
+
+Innovation: Novel probabilistic model generalizing Kingman's coalescent for aberrant tree topologies
+Robustness: Designed to be robust to population size fluctuations
+Output: Frequency spectrum-based estimator as alternative to Tajima's D
+
+6. Good (2022) - "Linkage disequilibrium between rare mutations"
+
+Focus: Forward-time framework for predicting LD patterns under selection
+Key Insight: Frequency scale dramatically impacts LD curve shapes
+Relevance: Essential for understanding site frequency spectrum signatures
+
+Search Strategy Performance:
+
+"mutation fitness effects inference": Most productive for recent methodological papers
+"site frequency ratio fitness": Yielded the newest method (Hey & Pavinato 2025) but also many irrelevant cardiovascular fitness papers
+"DFE population genomics": Some recent papers but need individual verification
+"selective forces site frequency spectrum": Fewer recent papers, mostly older foundational work
+
+Key Trends in Recent Literature:
+
+Methodological sophistication: Moving beyond simple summary statistics to model-based approaches
+Demographic robustness: Increasing focus on methods that are robust to demographic misspecification
+Linkage effects: Growing awareness of how linkage disequilibrium confounds DFE inference
+Rate heterogeneity: Recognition that mutation/recombination rate variation affects inference
+Multiple data types: Integration of different genomic signatures (SFS, LD, haplotypes)
+
+The field is rapidly evolving with more sophisticated statistical methods that better account for confounding factors in fitness effects inference.

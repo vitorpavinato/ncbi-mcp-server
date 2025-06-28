@@ -6,16 +6,26 @@ services:
     container_name: ncbi-mcp-server
     restart: unless-stopped
     environment:
-      - NCBI_EMAIL=${NCBI_EMAIL}
-      - NCBI_API_KEY=${NCBI_API_KEY}
-      - REDIS_URL=redis://redis:6379/0
+      # Required: Set your email in .env file
+      - NCBI_EMAIL=${NCBI_EMAIL:-}
+      # Optional: Set your API key in .env file for higher rate limits
+      - NCBI_API_KEY=${NCBI_API_KEY:-}
+      # Optional: Redis URL (uses in-memory cache if not provided)
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379/0}
+      # Optional: Logging level
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
     volumes:
+      # Cache directory for persistent storage
       - ./cache:/app/.cache
+      # Logs directory (create if needed)
       - ./logs:/app/logs
     depends_on:
       - redis
     networks:
       - ncbi-network
+    # For MCP stdio mode, typically no ports needed
+    # ports:
+    #   - "8000:8000"
 
   redis:
     image: redis:7-alpine

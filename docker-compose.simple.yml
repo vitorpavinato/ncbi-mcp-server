@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  ncbi-mcp-server:
+    build: .
+    container_name: ncbi-mcp-server-simple
+    restart: unless-stopped
+    environment:
+      # Required: Set your email in .env file
+      - NCBI_EMAIL=${NCBI_EMAIL:-}
+      # Optional: Set your API key in .env file for higher rate limits
+      - NCBI_API_KEY=${NCBI_API_KEY:-}
+      # Optional: Logging level
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      # Note: No Redis URL - uses in-memory cache
+    volumes:
+      # Cache directory for persistent storage
+      - ./cache:/app/.cache
+      # Logs directory (create if needed)
+      - ./logs:/app/logs
+    # For MCP stdio mode, typically no ports needed
+    # Uncomment if you need HTTP access
+    # ports:
+    #   - "8000:8000"
