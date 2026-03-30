@@ -13,6 +13,10 @@ A Model Context Protocol (MCP) server for searching NCBI databases, designed for
 🔗 **Related Articles**: Discover relevant research through NCBI's relationship algorithms
 📖 **MeSH Integration**: Search and utilize Medical Subject Headings for precise terminology
 
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/vitorpavinato-ncbi-mcp-server).
+
 ## Quick Start
 
 ### Prerequisites
